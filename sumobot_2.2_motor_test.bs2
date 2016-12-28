@@ -11,11 +11,11 @@ LStop		CON		750						' left motor stop
 LRevSlow		CON		700						' left motor reverse (slow)
 LRevFast		CON		500						' left motor reverse (fast)
 
-RFwdFast		CON		500						' right motor forward (fast)
-RFwdSlow		CON		700						' right motor forward (slow)
+RFwdFast		CON		485						' right motor forward (fast)
+RFwdSlow		CON		685						' right motor forward (slow)
 RStop		CON		750						' right motor stop
-RRevSlow		CON		800						' right motor reverse (slow)
-RRevFast		CON		1000						' right motor reverse (fast)
+RRevSlow		CON		815						' right motor reverse (slow)
+RRevFast		CON		1015						' right motor reverse (fast)
 ' ----[ Variables ] ----------------------------------------------------------------------------
 pulses		VAR		BYTE						' servo pulses counter
 ' ----[ Initialization ] -----------------------------------------------------------------------
@@ -31,7 +31,7 @@ Main:
 		PAUSE 20
 	NEXT
 
-	FOR pulses = 1 TO 30						' pivot 90 degrees on left wheel
+	FOR pulses = 1 TO 35						' pivot 90 degrees on left wheel
 		PULSOUT LMotor, LStop
 		PULSOUT RMotor, RFwdSlow
 		PAUSE 20
@@ -43,7 +43,7 @@ Main:
 		PAUSE 20
 	NEXT
 
-	FOR pulses = 1 TO 60						' pivot 180 degrees on right wheel
+	FOR pulses = 1 TO 70						' pivot 180 degrees on right wheel
 		PULSOUT LMotor, LFwdSlow
 		PULSOUT RMotor, RStop
 		PAUSE 20
