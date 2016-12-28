@@ -61,7 +61,7 @@ Main:
 		'PAUSE 20
 	'NEXT
 
-	'FOR pulses = 1 TO 16						' fast pivot 90 degrees rightward (16 pulses)
+	'FOR pulses = 1 TO 17						' fast pivot 90 degrees rightward (17 pulses)
 		'PULSOUT LMotor, LFwdFast
 		'PULSOUT Rmotor, RRevFast
 		'PAUSE 20
