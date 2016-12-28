@@ -1,0 +1,46 @@
+' SumoBot_Rotation_Calibration.BS2
+'{$STAMP BS2}
+'{$PBASIC 2.5}
+' ----[ I/O Definitions ] ----------------------------------------------------------------------
+LMotor		PIN		13						' left servo motor
+RMotor		PIN		12						' right servo motor
+' ----[ Constants ] ----------------------------------------------------------------------------
+LFwdFast		CON		820						' left motor forward (fast)
+LFwdSlow		CON		791						' left motor forward (slow)
+LStop         CON		750						' left motor stop
+LRevSlow		CON		705						' left motor reverse (slow)
+LRevFast		CON		660						' left motor reverse (fast)
+
+RFwdFast		CON		500						' right motor forward (fast)
+RFwdSlow		CON		700						' right motor forward (slow)
+RStop		CON		750						' right motor stop
+RRevSlow		CON		800						' right motor reverse (slow)
+RRevFast		CON		1000						' right motor reverse (fast)
+' ----[ Variables ] ----------------------------------------------------------------------------
+pulses		VAR		BYTE						' servo pulses counter
+' ----[ Initialization ] -----------------------------------------------------------------------
+Reset:
+	LOW LMotor								' initialize motor outputs
+	LOW RMotor
+	PAUSE 2500								' pause before motion starts
+' ----[ Program Code ] -------------------------------------------------------------------------
+Main:
+	FOR pulses = 1 TO 35						' pivot 90 degrees on left wheel
+		PULSOUT LMotor, LStop
+		PULSOUT RMotor, RFwdSlow
+		PAUSE 200
+	NEXT
+
+	FOR pulses = 1 TO 35						' pivot 90 degrees on right wheel
+		PULSOUT LMotor, LFwdSlow
+		PULSOUT RMotor, Rstop
+	NEXT
+
+Hold_Position:
+	DO
+		PULSOUT LMotor, LStop
+		PULSOUT RMotor, RStop
+		PAUSE 20
+	LOOP
+
+	END
