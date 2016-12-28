@@ -11,11 +11,11 @@ LStop         CON		750						' left motor stop
 LRevSlow      CON		705						' left motor reverse (slow)
 LRevFast      CON		660						' left motor reverse (fast)
 
-RFwdFast		CON		500						' right motor forward (fast)
-RFwdSlow		CON		700						' right motor forward (slow)
+RFwdFast      CON		500						' right motor forward (fast)
+RFwdSlow      CON		700						' right motor forward (slow)
 RStop         CON		750						' right motor stop
-RRevSlow		CON		800						' right motor reverse (slow)
-RRevFast		CON		1000						' right motor reverse (fast)
+RRevSlow      CON		800						' right motor reverse (slow)
+RRevFast      CON		1000						' right motor reverse (fast)
 ' ----[ Variables ] ----------------------------------------------------------------------------
 pulses		VAR		BYTE						' servo pulses counter
 ' ----[ Initialization ] -----------------------------------------------------------------------
