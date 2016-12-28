@@ -31,11 +31,11 @@ Main:
 		'PAUSE 20
 	'NEXT
 
-	FOR pulses = 1 TO 37						' pivot 90 degrees on right wheel 
-		PULSOUT LMotor, LFwdSlow
-		PULSOUT RMotor, RStop
-		PAUSE 20
-	NEXT
+	'FOR pulses = 1 TO 38						' pivot 90 degrees on right wheel (38 turns) 
+		'PULSOUT LMotor, LFwdSlow
+		'PULSOUT RMotor, RStop
+		'PAUSE 20
+	'NEXT
 
 Hold_Position:
 	DO
