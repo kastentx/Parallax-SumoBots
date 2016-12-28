@@ -25,17 +25,29 @@ Reset:
 	PAUSE 2500								' pause before motion starts
 ' ----[ Program Code ] -------------------------------------------------------------------------
 Main:
-	'FOR pulses = 1 TO 37						' pivot 90 degrees on left wheel (37 turns)
+	'FOR pulses = 1 TO 37						' pivot 90 degrees on left wheel (37 pulses)
 		'PULSOUT LMotor, LStop
 		'PULSOUT RMotor, RFwdSlow
 		'PAUSE 20
 	'NEXT
 
-	'FOR pulses = 1 TO 38						' pivot 90 degrees on right wheel (38 turns) 
+	'FOR pulses = 1 TO 38						' pivot 90 degrees on right wheel (38 pulses) 
 		'PULSOUT LMotor, LFwdSlow
 		'PULSOUT RMotor, RStop
 		'PAUSE 20
 	'NEXT
+
+	'FOR pulses = 1 TO 75						' pivot 180 degrees on left wheel (75 pulses)
+		'PULSOUT LMotor, LStop
+		'PULSOUT RMotor, RFwdSlow
+		'PAUSE 20
+	'NEXT
+
+	FOR pulses = 1 TO 75						' pivot 180 degrees on right wheel
+		PULSOUT LMotor, LFwdSlow
+		PULSOUT RMotor, RStop
+		PAUSE 20
+	NEXT
 
 Hold_Position:
 	DO
