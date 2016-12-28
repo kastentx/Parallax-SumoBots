@@ -22,7 +22,7 @@ pulses		VAR		BYTE						' servo pulses counter
 Reset:
 	LOW LMotor								' initialize motor outputs
 	LOW RMotor
-	PAUSE 2500								' pause before motion starts
+	PAUSE 3000								' pause before motion starts
 ' ----[ Program Code ] -------------------------------------------------------------------------
 Main:
 	'FOR pulses = 1 TO 37						' pivot 90 degrees on left wheel (37 pulses)
@@ -43,9 +43,33 @@ Main:
 		'PAUSE 20
 	'NEXT
 
-	FOR pulses = 1 TO 75						' pivot 180 degrees on right wheel
-		PULSOUT LMotor, LFwdSlow
-		PULSOUT RMotor, RStop
+	'FOR pulses = 1 TO 76						' pivot 180 degrees on right wheel (76 pulses)
+		'PULSOUT LMotor, LFwdSlow
+		'PULSOUT RMotor, RStop
+		'PAUSE 20
+	'NEXT
+
+	'FOR pulses = 1 TO 33						' fast pivot 180 degrees rightward (33 pulses)
+		'PULSOUT LMotor, LFwdFast
+		'PULSOUT Rmotor, RRevFast
+		'PAUSE 20
+	'NEXT
+
+	'FOR pulses = 1 TO 34						' fast pivot 180 degrees leftward (34 pulses)
+		'PULSOUT LMotor, LRevFast
+		'PULSOUT Rmotor, RFwdFast
+		'PAUSE 20
+	'NEXT
+
+	'FOR pulses = 1 TO 16						' fast pivot 90 degrees rightward (16 pulses)
+		'PULSOUT LMotor, LFwdFast
+		'PULSOUT Rmotor, RRevFast
+		'PAUSE 20
+	'NEXT
+
+	FOR pulses = 1 TO 18						' fast pivot 90 degrees leftward (18 pulses)
+		PULSOUT LMotor, LRevFast
+		PULSOUT Rmotor, RFwdFast
 		PAUSE 20
 	NEXT
 
