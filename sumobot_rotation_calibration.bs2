@@ -28,12 +28,13 @@ Main:
 	FOR pulses = 1 TO 35						' pivot 90 degrees on left wheel
 		PULSOUT LMotor, LStop
 		PULSOUT RMotor, RFwdSlow
-		PAUSE 200
+		PAUSE 20
 	NEXT
 
 	FOR pulses = 1 TO 35						' pivot 90 degrees on right wheel
 		PULSOUT LMotor, LFwdSlow
 		PULSOUT RMotor, Rstop
+		PAUSE 20
 	NEXT
 
 Hold_Position:
