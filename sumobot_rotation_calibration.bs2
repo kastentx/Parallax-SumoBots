@@ -5,15 +5,15 @@
 LMotor		PIN		13						' left servo motor
 RMotor		PIN		12						' right servo motor
 ' ----[ Constants ] ----------------------------------------------------------------------------
-LFwdFast		CON		820						' left motor forward (fast)
-LFwdSlow		CON		791						' left motor forward (slow)
+LFwdFast      CON		820						' left motor forward (fast)
+LFwdSlow      CON		791						' left motor forward (slow)
 LStop         CON		750						' left motor stop
-LRevSlow		CON		705						' left motor reverse (slow)
-LRevFast		CON		660						' left motor reverse (fast)
+LRevSlow      CON		705						' left motor reverse (slow)
+LRevFast      CON		660						' left motor reverse (fast)
 
 RFwdFast		CON		500						' right motor forward (fast)
 RFwdSlow		CON		700						' right motor forward (slow)
-RStop		CON		750						' right motor stop
+RStop         CON		750						' right motor stop
 RRevSlow		CON		800						' right motor reverse (slow)
 RRevFast		CON		1000						' right motor reverse (fast)
 ' ----[ Variables ] ----------------------------------------------------------------------------
