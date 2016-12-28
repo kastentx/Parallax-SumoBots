@@ -1,0 +1,71 @@
+' SumoBot_2.2_Motor_Test.BS2
+'{$STAMP BS2}
+'{$PBASIC 2.5}
+' ----[ I/O Definitions ] ----------------------------------------------------------------------
+LMotor		PIN		13						' left servo motor
+RMotor		PIN		12						' right servo motor
+' ----[ Constants ] ----------------------------------------------------------------------------
+LFwdFast		CON		1000						' left motor forward (fast)
+LFwdSlow		CON		800						' left motor forward (slow)
+LStop		CON		750						' left motor stop
+LRevSlow		CON		700						' left motor reverse (slow)
+LRevFast		CON		500						' left motor reverse (fast)
+
+RFwdFast		CON		500						' right motor forward (fast)
+RFwdSlow		CON		700						' right motor forward (slow)
+RStop		CON		750						' right motor stop
+RRevSlow		CON		800						' right motor reverse (slow)
+RRevFast		CON		1000						' right motor reverse (fast)
+' ----[ Variables ] ----------------------------------------------------------------------------
+pulses		VAR		BYTE						' servo pulses counter
+' ----[ Initialization ] -----------------------------------------------------------------------
+Reset:
+	LOW LMotor								' initialize motor outputs
+	LOW RMotor
+	PAUSE 2000								' pause before motion starts
+' ----[ Program Code ] -------------------------------------------------------------------------
+Main:
+	FOR pulses = 1 TO 65						' move forward (slowly) about 12 inches
+		PULSOUT LMotor, LFwdSlow
+		PULSOUT RMotor, RFwdSlow
+		PAUSE 20
+	NEXT
+
+	FOR pulses = 1 TO 30						' pivot 90 degrees on left wheel
+		PULSOUT LMotor, LStop
+		PULSOUT RMotor, RFwdSlow
+		PAUSE 20
+	NEXT
+
+	FOR pulses = 1 TO 25						' move forward (fast)
+		PULSOUT LMotor, LFwdFast
+		PULSOUT RMotor, RFwdFast
+		PAUSE 20
+	NEXT
+
+	FOR pulses = 1 TO 60						' pivot 180 degrees on right wheel
+		PULSOUT LMotor, LFwdSlow
+		PULSOUT RMotor, RStop
+		PAUSE 20
+	NEXT
+
+	FOR pulses = 1 TO 50						' move forward (fast)
+		PULSOUT LMotor, LFwdFast
+		PULSOUT RMotor, RFwdFast
+		PAUSE 20
+	NEXT
+
+	FOR pulses = 1 TO 55						' spin turn - clockwise
+		PULSOUT LMotor, LFwdFast
+		PULSOUT RMotor, RRevFast
+		PAUSE 20
+	NEXT
+
+Hold_Position:
+	DO
+		PULSOUT LMotor, LStop
+		PULSOUT RMotor, RStop
+		PAUSE 20
+	LOOP
+
+	END
