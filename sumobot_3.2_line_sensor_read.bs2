@@ -1,6 +1,6 @@
 ' SumoBot_3.2_Line_Sensor_Read.BS2
-' Interpereting the data from QTI Line Sensors in a meaningful way
-'{$STAMP BS2}
+' Converting the data from QTI Line Sensors into instructions
+'{$STAMP BS2}￼
 '{$PBASIC 2.5}
 
 ' ----[ I/O Definitions ] ----------------------------------------------------------------------
