@@ -1,0 +1,5 @@
+' SumoBot_3.3_Simple_Mini_Sumo.BS2
+' Testing out some motion in tne ring
+'{$STAMP BS2}
+'{$PBASIC 2.5}
+
