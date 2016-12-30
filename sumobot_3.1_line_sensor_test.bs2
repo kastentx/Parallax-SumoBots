@@ -19,7 +19,7 @@ Main:
 		DEBUG HOME,
 			"Left ", TAB, "Right", CR,
 			"-----", TAB, "-----", CR,
-			DEC lLine, CLREOL, TAB, DEC rLine, CLREOL
+			DEC4 lLine, CLREOL, TAB, DEC4 rLine, CLREOL
 
 		PAUSE 100
 	LOOP
