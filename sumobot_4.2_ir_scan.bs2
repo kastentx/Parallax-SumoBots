@@ -1,0 +1,104 @@
+' SumoBot_4.2_IR_Scan.BS2
+' linking the IR sensor to motion control
+'{$STAMP BS2}
+'{$PBASIC 2.5}
+
+' ----[ I/O Definitions ] ----------------------------------------------------------------------
+
+LMotor				PIN		13					' left servo motor
+RMotor				PIN		12					' right servo motor
+
+LfIrOut				PIN		4					' left IR LED output
+LfIrIn				PIN		11					' left IR sensor input
+RtIrOut				PIN		15					' right IR LED output
+RtIrIn				PIN		14					' right IR sensor input
+
+' ----[ Constants ] ----------------------------------------------------------------------------
+
+LFwdFast      		CON		821					' left motor forward (fast)
+LFwdSlow      		CON		791					' left motor forward (slow)
+LStop         		CON		750					' left motor stop
+LRevSlow     			CON		705					' left motor reverse (slow)
+LRevFast      		CON		660					' left motor reverse (fast)
+
+RFwdFast      		CON		500					' right motor forward (fast)
+RFwdSlow      		CON		700					' right motor forward (slow)
+RStop 		        	CON		750					' right motor stop
+RRevSlow      		CON		800					' right motor reverse (slow)
+RRevFast      		CON		1000					' right motor reverse (fast)
+
+' ----[ Variables ] ----------------------------------------------------------------------------
+
+irBits                 VAR		NIB					' storage for IR target data
+irLeft                 VAR		irBits.BIT1
+irRight                VAR		irBits.BIT0
+lastIr				VAR		NIB					' info from last reading
+
+pulses				VAR		BYTE					' counter for motor control
+
+' ----[ Initialization ] -----------------------------------------------------------------------
+
+Reset:
+	LOW LMotor									' initialize motor outputs
+	LOW RMotor
+
+' ----[ Program Code ] -------------------------------------------------------------------------
+
+Main:
+	GOSUB Read_IR_Sensors
+	BRANCH irBits, [Scan, Follow_Right, Follow_Left, Hold]
+
+Scan:
+	BRANCH lastIr, [Move_Fwd, Scan_Right, Scan_Left, Move_Fwd]
+
+Move_Fwd:
+	DEBUG HOME, "Forward", CLREOL
+	GOTO Main
+
+Scan_Right:										' spin right, slow
+	DEBUG HOME, "Scan Right", CLREOL
+	PULSOUT LMotor, LFwdSlow
+	PULSOUT RMotor, RRevSlow
+	PAUSE 20
+	GOTO Main
+
+Scan_Left:			   							' spin left, slow
+	DEBUG HOME, "Scan Left", CLREOL
+	PULSOUT LMotor, LRevSlow
+	PULSOUT RMotor, RFwdSlow
+	PAUSE 20
+	GOTO Main
+
+Follow_Right:										' spin right, fast
+	DEBUG HOME, "Follow Right", CLREOL
+	PULSOUT LMotor, LFwdFast
+	PULSOUT RMotor, RRevFast
+	PAUSE 20
+	lastIr = irBits								' save last direction found
+	GOTO Main
+
+Follow_Left:										' spin left, fast
+	DEBUG HOME, "Follow Left", CLREOL
+	PULSOUT LMotor, LRevFast
+	PULSOUT RMotor, RFwdFast
+	PAUSE 20
+	lastIr = irBits
+	GOTO Main
+
+Hold:											' on target
+	DEBUG HOME, "On Target", CLREOL
+	PULSOUT LMotor, LStop
+	PULSOUT RMotor, RStop
+	PAUSE 20
+	lastIr = %00
+	GOTO Main
+
+	END
+' ----[ Subroutines ] --------------------------------------------------------------------------
+
+Read_IR_Sensors:
+	FREQOUT LfIrOut, 1, 38500					' modulate left IR LED
+	irLeft = ~LfIrIn							' read input (1 = target)
+	FREQOUT RtIrOut, 1, 38500					' modulate right IR LED
+	irRight = ~RtIrIn							' read input (1 = target)
+	RETURN
