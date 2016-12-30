@@ -7,7 +7,7 @@
 LMotor		PIN		13						' left servo motor
 RMotor		PIN		12						' right servo motor
 ' ----[ Constants ] ----------------------------------------------------------------------------
-LFwdFast      CON		822						' left motor forward (fast)
+LFwdFast      CON		821						' left motor forward (fast)
 LFwdSlow      CON		791						' left motor forward (slow)
 LStop         CON		750						' left motor stop
 LRevSlow      CON		705						' left motor reverse (slow)
@@ -35,7 +35,7 @@ Main:
 			PAUSE 20
 		NEXT
 
-		FOR pulses = 1 TO 17					' fast pivot 90 degrees rightward (17 pulses)
+		FOR pulses = 1 TO 18					' fast pivot 90 degrees rightward (17 pulses)
 			PULSOUT LMotor, LFwdFast
 			PULSOUT Rmotor, RRevFast
 			PAUSE 20
