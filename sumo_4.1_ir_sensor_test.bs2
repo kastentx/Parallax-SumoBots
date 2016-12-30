@@ -1,0 +1,39 @@
+' SumoBot_4.1_IR_Sensor_Test.BS2
+' Testing out IR Sensors  
+'{$STAMP BS2}
+'{$PBASIC 2.5}
+
+' ----[ I/O Definitions ] ----------------------------------------------------------------------
+
+LfIrOut				PIN		4					' left IR LED output
+LfIrIn				PIN		11					' left IR sensor input
+RtIrOut				PIN		15					' right IR LED output
+RtIrIn				PIN		14					' right IR sensor input
+
+' ----[ Variables ] ----------------------------------------------------------------------------
+
+irBits				VAR		NIB					' storage for IR target data
+irLeft				VAR		irBits.BIT1
+irRight				VAR		irBits.BIT0
+
+' ----[ Program Code ] -------------------------------------------------------------------------
+
+Main:
+	DO
+		FREQOUT LfIrOut, 1, 38500					' modulate left IR LED
+		irLeft = ~LFIrIn							' read input (1 = target)
+
+		FREQOUT RtIrOut, 1, 38500					' modulate right IR LED
+		irRight = ~RtIrIn							' read input (1 = target)
+
+		DEBUG HOME,
+			"L  R", CR,
+			"----", CR,
+			BIN1 irLeft, "  ", BIN1 irRight
+
+		PAUSE 20
+	LOOP
+
+	END
+
+ 
