@@ -1,0 +1,43 @@
+' SumoBot_3.1_Line_Sensor_Test.BS2
+' testing the QTI sensors to ensure they detect the edge of ring
+'{$STAMP BS2}
+'{$PBASIC 2.5}
+' ----[ I/O Definitions ] ----------------------------------------------------------------------
+LLinePwr               PIN		10					' left line sensor power
+LLineIn                PIN		9					' left line sensor input
+RLinePwr               PIN		7					' right line sensor power
+RLineIn                PIN		8					' right line sensor input
+' ----[ Variables ] ----------------------------------------------------------------------------
+lLine                  VAR		WORD					' left sensor raw reading
+rLine                  VAR		WORD					' right sensor raw reading
+' ----[ Program Code ] -------------------------------------------------------------------------
+Main:
+	DO
+		GOSUB Read_Left
+		GOSUB Read_Right
+
+		DEBUG HOME,
+			"Left ", TAB, "Right", CR,
+			"-----", TAB, "-----", CR,
+			DEC lLine, CLREOL, TAB, DEC rLine, CLREOL
+
+		PAUSE 100
+	LOOP
+
+	END
+' ----[ Subroutines ] -------------------------------------------------------------------------
+Read_Left:
+	HIGH LLinePwr									' activate sensor
+	HIGH LLineIn									' discharge QTI cap
+	PAUSE 1
+	RCTIME LLineIn, 1, lLine						' read sensor value
+	LOW LLinePwr									' deactivate sensor
+	RETURN
+
+Read_Right:
+	HIGH RLinePwr									' activate sensor
+	HIGH RLineIn									' discharge QTI cap
+	PAUSE 1
+	RCTIME RLineIn, 1, rLine						' read sensor value
+	LOW RLinePwr									' deactivate sensor
+	RETURN
